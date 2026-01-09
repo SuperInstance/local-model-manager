@@ -1,0 +1,83 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "local-model-manager"
+version = "1.0.0"
+description = "Local model management system optimized for edge AI deployment"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Local Model Manager Team", email = "contact@localmodelmanager.dev"}
+]
+keywords = ["ai", "llm", "local-models", "inference", "edge-ai", "gpu"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "llama-cpp-python>=0.2.0",
+    "torch>=2.1.0",
+    "transformers>=4.36.0",
+    "accelerate>=0.25.0",
+    "safetensors>=0.4.0",
+    "huggingface-hub>=0.20.0",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.5.0",
+    "requests>=2.31.0",
+    "psutil>=5.9.0",
+    "GPUtil>=1.4.0",
+    "aiofiles>=23.2.0",
+    "PyYAML>=6.0.1",
+    "tqdm>=4.66.0",
+    "aiohttp>=3.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.7.0",
+]
+
+[project.scripts]
+local-model-server = "local_model_manager.api.server:main"
+local-model-download = "local_model_manager.core.model_manager:main"
+
+[project.urls]
+Homepage = "https://github.com/yourusername/local-model-manager"
+Documentation = "https://github.com/yourusername/local-model-manager/docs"
+Repository = "https://github.com/yourusername/local-model-manager"
+"Bug Tracker" = "https://github.com/yourusername/local-model-manager/issues"
+
+[tool.black]
+line-length = 88
+target-version = ['py310', 'py311', 'py312']
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"

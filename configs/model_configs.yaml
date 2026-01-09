@@ -1,0 +1,65 @@
+models:
+  phi-3.5-mini:
+    name: "Phi-3.5-mini"
+    repo_id: "microsoft/Phi-3.5-mini-instruct"
+    gguf_file: "phi-3.5-mini.Q4_K_M.gguf"
+    context_size: 4096
+    gpu_layers: 33  # For RTX 4050 6GB
+    batch_size: 512
+    max_tokens: 2048
+    temperature: 0.7
+    top_p: 0.9
+    repeat_penalty: 1.1
+    estimated_vram_gb: 2.1
+    specialization: "code, reasoning, technical"
+
+  llama-3.2-3b:
+    name: "Llama-3.2-3B-Instruct"
+    repo_id: "meta-llama/Llama-3.2-3B-Instruct"
+    gguf_file: "llama-3.2-3b-instruct.Q4_K_M.gguf"
+    context_size: 8192
+    gpu_layers: 28  # For RTX 4050 6GB
+    batch_size: 512
+    max_tokens: 4096
+    temperature: 0.8
+    top_p: 0.95
+    repeat_penalty: 1.1
+    estimated_vram_gb: 2.4
+    specialization: "general, conversation, analysis"
+
+  gemma-2-2b:
+    name: "Gemma-2-2B-IT"
+    repo_id: "google/gemma-2-2b-it"
+    gguf_file: "gemma-2-2b-it.Q4_K_M.gguf"
+    context_size: 8192
+    gpu_layers: 25  # For RTX 4050 6GB
+    batch_size: 512
+    max_tokens: 2048
+    temperature: 0.75
+    top_p: 0.9
+    repeat_penalty: 1.1
+    estimated_vram_gb: 1.8
+    specialization: "creative, writing, summarization"
+
+system:
+  max_total_vram_gb: 6.0
+  safety_margin_gb: 1.0
+  max_concurrent_models: 3
+  model_unload_timeout: 30
+  auto_switch_threshold: 0.8
+  memory_check_interval: 5
+
+download:
+  base_url: "https://huggingface.co"
+  use_mirror: true
+  resume_downloads: true
+  verify_checksum: true
+  chunk_size: 8192
+  max_retries: 3
+
+performance:
+  use_mmap: true
+  use_mlock: false
+  numa_policy: "local"
+  cpu_threads: 4
+  gpu_split: "auto"
